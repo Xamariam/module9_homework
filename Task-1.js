@@ -1,6 +1,7 @@
 // Задание 1
 
-const xmlString = `<list>
+const xmlParser= new DOMParser();
+       let xml=`<list>
   <student>
     <name lang="en">
       <first>Ivan</first>
@@ -17,51 +18,33 @@ const xmlString = `<list>
     <age>58</age>
     <prof>driver</prof>
   </student>
-</list>`
+</list>`; 
 
-const parser = new DOMParser();
-const xmlDOM = parser.parseFromString(xmlString, "text/xml")
+const xmlDOM= xmlParser.parseFromString(xml,'text/xml');
+const student= xmlDOM.querySelectorAll('student');
+const name=xmlDOM.querySelectorAll('name');
+ const second=xmlDOM.querySelectorAll('second');
+const first=xmlDOM.querySelectorAll('first');
+ const prof=xmlDOM.querySelectorAll('prof');
+ const age=xmlDOM.querySelectorAll('age');
+ const lang=name[0].getAttribute('lang');
 
-const listNode = xmlDOM.querySelector ("list");
-const studentOneNode = listNode.querySelector ("student");
-const studentTwoNode = listNode.querySelectorAll ("student")[1];
-
-const nameOneNode = studentOneNode.querySelector ("name");
-const nameTwoNode = studentTwoNode.querySelector ("name");
-
-const firstNameOneNode = nameOneNode.querySelector ("first");
-const firstNameTwoNode = nameTwoNode.querySelector ("first");
-
-const secondNameOneNode = nameOneNode.querySelector ("second");
-const secondNameTwoNode = nameTwoNode.querySelector ("second");
-
-const ageOneNode = studentOneNode.querySelector ("age");
-const ageTwoNode = studentTwoNode.querySelector ("age");
-
-const profOneNode = studentOneNode.querySelector ("prof");
-const profTwoNode = studentTwoNode.querySelector ("prof");
-
-
-const langOneAttr = nameOneNode.getAttribute("lang");
-const langTwoAttr = nameTwoNode.getAttribute("lang");
-
-
-const result = {
-  list: [ {
-    name: firstNameOneNode.textContent + ' ' + secondNameOneNode.textContent,
-    lang: langOneAttr,
-    age: ageOneNode.textContent,
-    prof: profOneNode.textContent
-  },
-  {
-  name: firstNameTwoNode.textContent + ' ' + secondNameTwoNode.textContent,
-    lang: langTwoAttr,
-    age: ageTwoNode.textContent,
-    prof: profTwoNode.textContent
-} ]
-
-  
-  
+const obj= {
+    list:[
+    
+    ]
 }
 
-console.log('result', result)
+for(var i=0;i<student.length;i++){
+  obj.list.push(  {
+            name:0,
+            prof:0,
+            age:0,
+            lang:0,
+        });
+  obj.list[i].name=`${first[i].textContent} ${second[i].textContent}`;
+  obj.list[i].prof=`${prof[i].textContent}`;
+  obj.list[i].age=`${age[i].textContent}`;
+  obj.list[i].lang=name[i].getAttribute('lang');
+
+}
